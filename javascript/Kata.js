@@ -10,7 +10,7 @@ function ListNode(data, next = null) {
 };
 
 function flatten(root) {
-	if(!root) return null;
+  if(!root) return null;
   
   let arr = traverse(root);
   let uniqueArray = [];
@@ -18,8 +18,8 @@ function flatten(root) {
   // eliminate the duplicate elements
   for(let ele of arr){
   
-  	if(uniqueArray.indexOf(ele) == -1){
-    	uniqueArray.push(+ele);
+    if(uniqueArray.indexOf(ele) == -1){
+      uniqueArray.push(+ele);
     }
   }
   
@@ -31,32 +31,32 @@ function flatten(root) {
 };
 
 function traverse(root){
-	let valueArray = [], leftArray = [], rightArray = [];
+  let valueArray = [], leftArray = [], rightArray = [];
   
   // get all elements from value
   let value = root.value;
   while(value){
-  	valueArray.push(value.data);
+    valueArray.push(value.data);
     value = value.next;
   }
   
   // get all elements from left
-	if(root.left){
-  	leftArray = traverse(root.left);
+  if(root.left){
+    leftArray = traverse(root.left);
   }
   
-  // get all elements from left
+  // get all elements from right
   if(root.right){
-  	rightArray = traverse(root.right);
+    rightArray = traverse(root.right);
   }
  
- 	// get all elements
+  // get all elements
   return valueArray.concat(leftArray).concat(rightArray);
 };
 
 function toList(arr){
-	if(arr.length == 0) return null;
-	let l = new ListNode(arr.shift());
+  if(arr.length == 0) return null;
+  let l = new ListNode(arr.shift());
   l.next = toList(arr);
   return l;
 };
